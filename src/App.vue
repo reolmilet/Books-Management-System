@@ -1,30 +1,54 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import HomePage from './view/home.vue'
+import TabBar from './components/TabBar.vue'
+import sideBar from './components/sideBar.vue';
+export default {
+  name: 'App',
+  components: {
+    HomePage,
+    TabBar,
+    sideBar
+  }
+}
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
-</template>
+  <div class="common-layout">
+    <el-container>
 
+      <el-header class="header"><TabBar></TabBar></el-header>
+      <el-container>
+        <el-aside width="200px" class="aside"><sideBar></sideBar></el-aside>
+        <el-main>
+          <div class="home-page-wrapper">
+            <HomePage />
+           </div>
+        </el-main>
+      </el-container>
+    </el-container>
+  </div>
+</template>
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.common-layout {
+  
+  max-height: 100vh; /* 视口的高度 */
+  overflow: auto; /* 如果内容超出容器，显示滚动条 */
+
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.home-page-wrapper {
+
+  overflow: auto; 
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.header {
+  background-color: #ffffff;
+  color: #fff;
+  text-align: center;
+  line-height: 60px;
+}
+.aside{
+  background-color: #ffffff;
+  color: #ffffff;
+  text-align: center;
+  line-height: 400px;
 }
 </style>
