@@ -5,6 +5,7 @@
       mode="horizontal"
       :ellipsis="false"
       @select="handleSelect"
+      router="true"
     >
       <div><img
           style="width: 50px"
@@ -15,19 +16,12 @@
        
       
       <div class="flex-grow" />
-      <el-menu-item index="1">Processing Center</el-menu-item>
-      <el-sub-menu index="2">
-        <template #title>Workspace</template>
-        <el-menu-item index="2-1">item one</el-menu-item>
-        <el-menu-item index="2-2">item two</el-menu-item>
-        <el-menu-item index="2-3">item three</el-menu-item>
-        <el-sub-menu index="2-4">
-          <template #title>item four</template>
-          <el-menu-item index="2-4-1">item one</el-menu-item>
-          <el-menu-item index="2-4-2">item two</el-menu-item>
-          <el-menu-item index="2-4-3">item three</el-menu-item>
-        </el-sub-menu>
-      </el-sub-menu>
+     
+      <el-menu-item index="/"> 首页</el-menu-item>
+      <el-menu-item index="signIn"> 注册</el-menu-item>
+      <el-menu-item index="signup">
+        登录
+      </el-menu-item>
     </el-menu>
   </template>
   

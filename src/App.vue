@@ -2,6 +2,7 @@
 import HomePage from './view/home.vue'
 import TabBar from './components/TabBar.vue'
 import sideBar from './components/sideBar.vue';
+import { RouterView } from 'vue-router'
 export default {
   name: 'App',
   components: {
@@ -21,7 +22,7 @@ export default {
         <el-aside width="200px" class="aside"><sideBar></sideBar></el-aside>
         <el-main>
           <div class="home-page-wrapper">
-            <HomePage />
+            <RouterView />
            </div>
         </el-main>
       </el-container>
@@ -49,6 +50,7 @@ export default {
   background-color: #ffffff;
   color: #ffffff;
   text-align: center;
-  line-height: 400px;
+  line-height: 100%;
+  
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <form class="c-form">
   <fieldset class="c-form__fieldset">
-    <legend class="c-form__title">登录</legend>
+    <legend class="c-form__title">注册</legend>
 
     <div class="u-spacer--sm"></div>
 
@@ -21,8 +21,8 @@
 
     <div class="u-spacer--sm"></div>
 
-    <a class="c-form__link" href="#">忘记密码？</a>
-    <button type="button" class="c-form__button u-ripple">登录</button>
+
+    <button type="button" class="c-form__button u-ripple">注册</button>
   </fieldset>
 </form>
 
@@ -39,7 +39,7 @@
 </svg>
 </template>
 <style lang="scss">
-$primary-color: #9409ac;
+$primary-color: #0952ac;
 $transition: 0.3s;
 $font-size: 16px; // Change value to scale
 
