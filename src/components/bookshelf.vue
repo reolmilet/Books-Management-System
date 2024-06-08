@@ -10,6 +10,15 @@
       <li>
         <img src="/public/img/3.jpg">      </li>
     </ul>
+    <ul>
+      
+      <li>
+        <img src="/public/img/1.jpg">      </li>
+      <li>
+        <img src="/public/img/2.jpg">      </li>
+      <li>
+        <img src="/public/img/3.jpg">      </li>
+    </ul>
   </div>
   <div class="shelf-shadows"></div>
   <div class="shelf"></div>

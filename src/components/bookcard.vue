@@ -1,6 +1,7 @@
 <script >
 import { ref,computed } from 'vue';
 import store from '../stores/index.js';
+import { cloneFnJSON } from '@vueuse/core';
 export default {
   props: {
     book: {
@@ -9,12 +10,29 @@ export default {
     }
   },
   setup(props) {
+    const bookBo=computed(()=>store.state.myBookList.some(item=>item.id===props.book.id))
     const mybook = computed(() => store.state.myBookList);
-const addBook = () => {
+const addBook = async() => {
+  console.log(111)
+  console.log(store.state.match)
+  if(!store.state.match){
+    alert("请先登录")
+    return
+  }
     store.commit('addBook', props.book);
     console.log(store.state.myBookList);
+    const data = {
+      book_id: props.book.id,
+      user_id: store.state.signin.id
+    }
+    await store.dispatch('axiosSetBorrowData',data);
   }
-  return { mybook, addBook }
+  const reduceBook = () => {
+
+    store.commit('reduceBook', props.book);
+    console.log(store.state.myBookList);
+  }
+  return { mybook, addBook,reduceBook ,bookBo}
   },
   
 //   watch()={
@@ -36,12 +54,13 @@ const addBook = () => {
   
   
   <div class="product">
-  <p>{{ book.author }}</p>
+  <p style="margin-bottom: 5px;">{{ book.author }}</p>
     <h1>{{ book.title }}</h1>
-    <h2>{{ book.price }}</h2>
+    <h2>{{ book.price }}￥</h2>
     <p class="desc">{{ book.brief }}</p>
     <div class="buttons">
-      <button class="add" @click="addBook">加入书架</button>
+      <button class="add" @click="addBook" v-if="!bookBo">加入书架</button>
+      <button class="add" @click="reduceBook" v-if="bookBo">取消加入书架</button>
       <button class="like"><span>♥</span></button>
     </div>
   </div>

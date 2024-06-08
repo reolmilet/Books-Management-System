@@ -9,10 +9,12 @@ export default createStore({
     match: 'false',
     AllBookList: {},
     myBookList: [],
+  
   },
   mutations: {
    
     setUserData(state, userData) {
+      
       state.userData = userData
     },
     setSignin(state, signin) {
@@ -29,6 +31,9 @@ export default createStore({
     },
     addBook(state, book) {
       state.myBookList.push(book)
+    },
+    reduceBook(state, book) {
+      state.myBookList = state.myBookList.filter(item => item.id !== book.id)
     }
    
   },
@@ -41,11 +46,18 @@ export default createStore({
       }
       return response.data
     },
+    async axiosSetBorrowData({ commit }, data) {
+     
+      const response = await api.borrowBookServlet(data)
+      
+      return response
+    },
     async axiosGetUserData({ commit }, value) {
       const res = await api.FindUserServlet(value)
-
+      console.log(res.data.userdata)
       commit('setSignin', res.data.userdata)
-      commit('setMatch', res.data.match)
+      commit('setMatch', true)
+     
       return res.data.match
     },
     async axiosAllBookList({ commit }, ) {

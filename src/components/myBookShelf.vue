@@ -1,21 +1,43 @@
-<template >
-   <div class="bookshelf">
-  <div class="book-grid">
-    <ul>
-      
-      <li>
-        <img src="/public/img/1.jpg">      </li>
-      <li>
-        <img src="/public/img/2.jpg">      </li>
-      
-    </ul>
+<template>
+  <div class="bookshelf" v-for="(group, index) in groupedImages" :key="'group-' + index">
+    <div class="book-grid" >
+      <div >
+        <ul>
+          <li v-for="(img, index) in group" :key="'img-' + index">
+            <img :src="img" />
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="shelf-shadows"></div>
+    <div class="shelf"></div>
   </div>
-  <div class="shelf-shadows"></div>
-  <div class="shelf"></div>
-</div>
-
-
 </template>
+
+<script>
+import { ref, computed } from 'vue';
+import store from '../stores/index.js';
+export default {
+  setup() {
+    const images = computed(() => store.state.myBookList.map(item => item.img));
+    
+
+    const groupedImages = computed(() => {
+      let groups = [];
+      for (let i = 0; i < images.value.length; i += 3) {
+        groups.push(images.value.slice(i, i + 3));
+      }
+      return groups;
+    });
+
+    return { groupedImages };
+  }
+}
+</script>
+
+<style>
+/* your styles here */
+</style>
 <style >
 ::before, ::after {
     content: none;

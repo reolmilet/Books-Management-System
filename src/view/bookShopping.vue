@@ -3,14 +3,14 @@ import { onMounted, onBeforeUnmount, ref } from 'vue';
 import bookshelf from '../components/bookshelf.vue'
 import bookcard from '../components/bookcard.vue';
 import stores from '../stores/index.js'
-import bookcardList from '../components/bookcardList.vue';
+
 import Promise from 'bluebird';
 
 export default {
   components: {
     bookshelf,
     bookcard,
-    bookcardList
+  
   },
   setup() {
     let computedAllBookList = ref(stores.state.AllBookList)
