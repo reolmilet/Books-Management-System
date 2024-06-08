@@ -1,3 +1,41 @@
+<script>
+import { ref, computed } from 'vue'
+import stores from '../stores/index.js'
+import { ElMessage } from 'element-plus'
+
+export default {
+  setup() {
+    const show = ref(false)
+    const userName = ref('')
+    const passward = ref('')
+    const usernameed = computed(() => {
+      return stores.state.signin.username
+    })
+    const matched = computed(() => {
+      return stores.state.match
+    })
+    let match = ref(false)
+    const signup = async () => {
+      const bo = await stores.dispatch('axiosSetUserData', {
+        userName: userName.value,
+        password: passward.value
+      })
+      if (bo) {
+        ElMessage('注册成功')
+      } else {
+        ElMessage('注册失败')
+      }
+    }
+    
+
+    return { show, userName, passward, signup, usernameed, match, matched }
+  }
+}
+</script>
+
+
+
+
 <template>
     <form class="c-form">
   <fieldset class="c-form__fieldset">
@@ -6,7 +44,7 @@
     <div class="u-spacer--sm"></div>
 
     <label class="c-formGroup" for="email">
-            <input class="c-formGroup__input u-ripple" type="email" id="email" placeholder="Email ID" autocomplete="off">
+            <input class="c-formGroup__input u-ripple" type="email" id="email" placeholder="Email ID" autocomplete="off" v-model="userName">
             <span class="c-formGroup__title">账号</span>
             <i class="c-formGroup__icon"><svg><use xlink:href="#icon-email" /></svg></i>
         </label>
@@ -14,7 +52,7 @@
     <div class="u-spacer"></div>
 
     <label class="c-formGroup" for="password">
-            <input class="c-formGroup__input u-ripple" type="password" id="password" placeholder="Password">
+            <input class="c-formGroup__input u-ripple" type="password" id="password" placeholder="Password" v-model="passward">
             <span class="c-formGroup__title">密码</span>
             <i class="c-formGroup__icon"><svg><use xlink:href="#icon-padlock" /></svg></i>
         </label>
@@ -22,7 +60,7 @@
     <div class="u-spacer--sm"></div>
 
 
-    <button type="button" class="c-form__button u-ripple">注册</button>
+    <button type="button" class="c-form__button u-ripple" @click="signup">注册</button>
   </fieldset>
 </form>
 

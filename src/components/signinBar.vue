@@ -1,3 +1,40 @@
+<script>
+import { ref, computed } from 'vue'
+import stores from '../stores'
+import { ElMessage } from 'element-plus'
+export default {
+  setup() {
+    const show = ref(false)
+    const userName = ref('')
+    const passward = ref('')
+    const usernameed = computed(() => {
+      return stores.state.signin.username
+    })
+    const matched = computed(() => {
+      return stores.state.match
+    })
+    let match = ref(false)
+    const signin = async () => {
+      match.value = await stores.dispatch('axiosGetUserData', {
+        userName: userName.value,
+        password: passward.value
+      })
+
+      if (match.value == true) {
+        ElMessage('登录成功')
+        console.log(111)
+      } else {
+        ElMessage('登录失败')
+        console.log(222)
+      }
+    }
+    
+    return { show, userName, passward, signin, usernameed, match, matched }
+  }
+}
+</script>
+
+
 <template>
     <form class="c-form">
   <fieldset class="c-form__fieldset">
@@ -6,7 +43,7 @@
     <div class="u-spacer--sm"></div>
 
     <label class="c-formGroup" for="email">
-            <input class="c-formGroup__input u-ripple" type="email" id="email" placeholder="Email ID" autocomplete="off">
+            <input class="c-formGroup__input u-ripple" type="email" id="email" placeholder="Email ID" autocomplete="off" v-model="userName">
             <span class="c-formGroup__title">账号</span>
             <i class="c-formGroup__icon"><svg><use xlink:href="#icon-email" /></svg></i>
         </label>
@@ -14,7 +51,7 @@
     <div class="u-spacer"></div>
 
     <label class="c-formGroup" for="password">
-            <input class="c-formGroup__input u-ripple" type="password" id="password" placeholder="Password">
+            <input class="c-formGroup__input u-ripple" type="password" id="password" placeholder="Password" v-model="passward">
             <span class="c-formGroup__title">密码</span>
             <i class="c-formGroup__icon"><svg><use xlink:href="#icon-padlock" /></svg></i>
         </label>
@@ -22,7 +59,7 @@
     <div class="u-spacer--sm"></div>
 
     <a class="c-form__link" href="#">忘记密码？</a>
-    <button type="button" class="c-form__button u-ripple">登录</button>
+    <button type="button" class="c-form__button u-ripple" @click="signin">登录</button>
   </fieldset>
 </form>
 

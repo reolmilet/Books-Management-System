@@ -19,5 +19,10 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
   ],
+  server: {
+    proxy: {
+      '/api': 'http://localhost:8080'
+    }
+  }
 })
 

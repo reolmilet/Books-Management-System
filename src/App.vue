@@ -37,7 +37,7 @@ export default {
 
 }
 .home-page-wrapper {
-
+height: 80vh;
   overflow: auto; 
 }
 .header {
