@@ -54,7 +54,7 @@
   
   const activeNames = ref(['1'])
   const handleChange = (val) => {
-    console.log(val)
+ 
   }
   </script>
   

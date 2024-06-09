@@ -1,11 +1,22 @@
-<script setup>
+<script >
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+export default {
+  name: 'HomePage',
+  setup() {
+	const router = useRouter()
+	const count = ref(0)
+	const borrow = () => {
+		
 
-defineProps({
-  msg: String,
-})
+// 现在你可以在这个组件中使用 `router` 实例
+// 例如，跳转到一个新的路由
+router.push('/bookShopping')
+	}
+	return { count, borrow }
+  }
+}
 
-const count = ref(0)
 </script>
 
 <template>
@@ -27,7 +38,7 @@ const count = ref(0)
         <ul class='page'>
           <li></li>
           <li>
-            <a class="btn" href="#">借阅</a>
+            <a class="btn" href="#" @click="borrow">借阅</a>
           </li>
           <li></li>
           <li></li>
@@ -64,7 +75,7 @@ const count = ref(0)
         <ul class='page'>
           <li></li>
           <li>
-            <a class="btn" href="#">借阅</a>
+            <a class="btn" href="#" @click="borrow">借阅</a>
           </li>
           <li></li>
           <li></li>
@@ -100,7 +111,7 @@ const count = ref(0)
         <ul class='page'>
           <li></li>
           <li>
-            <a class="btn" href="#">借阅</a>
+            <a class="btn" href="#" @click="borrow">借阅</a>
           </li>
           <li></li>
           <li></li>

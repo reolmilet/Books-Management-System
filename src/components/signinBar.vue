@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import stores from '../stores'
 import { ElMessage } from 'element-plus'
+import router from '../router'
 export default {
   setup() {
     const show = ref(false)
@@ -22,10 +23,10 @@ export default {
 
       if (match.value == true) {
         ElMessage('登录成功')
-        console.log(111)
+        router.push('/myBook')
       } else {
         ElMessage('登录失败')
-        console.log(222)
+
       }
     }
     

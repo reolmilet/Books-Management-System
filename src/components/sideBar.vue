@@ -37,28 +37,11 @@
   } from '@element-plus/icons-vue'
   import stores from '../stores';
   const handleOpen = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath)
+
   }
   const handleClose = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath)
+
   }
-  // const getAllBookList = async () => {
-  //     await stores.dispatch('axiosAllBookList')
-  //     console.log(stores.state.AllBookList)
-  //   }
-  
-    
-
-    // const getAllBookList = async () => {
-    //   const result = await stores.dispatch('axiosAllBookList')
-    
-    //   console.log( result)
-    
-
-    // // 在组件挂载时获取书籍列表
-  
-
-    // return { getAllBookList }
   
   </script>
   <style>

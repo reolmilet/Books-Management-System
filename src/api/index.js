@@ -13,7 +13,6 @@ const addUsersServlet = (value) =>
     }
   })
 const borrowBookServlet = (value) => {
-    console.log(`book_id1111111: ${value.book_id}, user_id: ${value.user_id}`);
     const params = `book_id=${encodeURIComponent(value.book_id)}&user_id=${encodeURIComponent(value.user_id)}`;
     instance.get(`${URLs.borrowBookServlet}?${params}`)
 }
@@ -27,11 +26,27 @@ const getAllBookList = () =>
       
     })
 
+    const getBorrowBookList = (value) =>
+      instance.get(URLs.findBorrowBookServlet, {
+        params: {  user_id: value }
+      })
+    const returnBorrowBookServlet = (value) => {
+      const params = `book_id=${encodeURIComponent(value.book_id)}&user_id=${encodeURIComponent(value.user_id)}`;
+      instance.get(`${URLs.returnBorrowBookServlet}?${params}`)
+    }
+    const findBorrowBookDataServlet = (value) =>
+      instance.get(URLs.findBorrowBookDataServlet, {
+        params: {  user_id: value }
+      })
+  
 export default {
 
   addUsersServlet,
   FindUserServlet,
  
   getAllBookList,
-  borrowBookServlet
+  borrowBookServlet,
+  getBorrowBookList,
+  returnBorrowBookServlet,
+  findBorrowBookDataServlet
 }

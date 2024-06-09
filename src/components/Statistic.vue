@@ -31,16 +31,26 @@
     </el-row>
   </template>
   
-  <script lang="ts" setup>
+  <script >
   import { ref } from 'vue'
   import { useTransition } from '@vueuse/core'
   import { ChatLineRound, Male } from '@element-plus/icons-vue'
-  
-  const source = ref(0)
-  const outputValue = useTransition(source, {
-    duration: 1500,
-  })
-  source.value = 172000
+  export default {
+    name: 'Statistic',
+    components: {
+      ChatLineRound,
+      Male
+    },  // 这里添加了逗号
+    setup() {
+      
+      const source = ref(0)
+      const outputValue = useTransition(source, {
+        duration: 1500,
+      })
+      source.value = 172000
+      return { outputValue }
+    }
+  }
   </script>
   
   <style scoped>

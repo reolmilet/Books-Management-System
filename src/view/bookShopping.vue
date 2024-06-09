@@ -19,7 +19,7 @@ export default {
     const getAllBookList = async () => {
       promise = Promise.resolve(stores.dispatch('axiosAllBookList'));
       computedAllBookList.value = await promise;
-      console.log(computedAllBookList.value);
+  
     }
 
     onMounted(getAllBookList);

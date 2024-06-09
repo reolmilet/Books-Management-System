@@ -13,24 +13,28 @@ export default {
     const bookBo=computed(()=>store.state.myBookList.some(item=>item.id===props.book.id))
     const mybook = computed(() => store.state.myBookList);
 const addBook = async() => {
-  console.log(111)
-  console.log(store.state.match)
+
   if(!store.state.match){
     alert("请先登录")
     return
   }
     store.commit('addBook', props.book);
-    console.log(store.state.myBookList);
+
     const data = {
       book_id: props.book.id,
       user_id: store.state.signin.id
     }
     await store.dispatch('axiosSetBorrowData',data);
   }
-  const reduceBook = () => {
+  const reduceBook = async() => {
 
     store.commit('reduceBook', props.book);
-    console.log(store.state.myBookList);
+    const data = {
+      book_id: props.book.id,
+      user_id: store.state.signin.id
+    }
+    await store.dispatch('axiosReturnBook',data);
+   
   }
   return { mybook, addBook,reduceBook ,bookBo}
   },

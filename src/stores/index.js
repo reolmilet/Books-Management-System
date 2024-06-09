@@ -9,7 +9,7 @@ export default createStore({
     match: 'false',
     AllBookList: {},
     myBookList: [],
-  
+    borrowBookData: {}
   },
   mutations: {
    
@@ -34,6 +34,9 @@ export default createStore({
     },
     reduceBook(state, book) {
       state.myBookList = state.myBookList.filter(item => item.id !== book.id)
+    },
+    setBorrowBookData(state, borrowBookData) {
+      state.borrowBookData = borrowBookData
     }
    
   },
@@ -52,11 +55,13 @@ export default createStore({
       
       return response
     },
-    async axiosGetUserData({ commit }, value) {
+    async axiosGetUserData({ commit,dispatch }, value) {
       const res = await api.FindUserServlet(value)
-      console.log(res.data.userdata)
+     
       commit('setSignin', res.data.userdata)
       commit('setMatch', true)
+      await dispatch('axiosMyBookList', res.data.userdata.id)
+      await dispatch('axiosFindBorrowBookData', res.data.userdata.id)
      
       return res.data.match
     },
@@ -64,10 +69,26 @@ export default createStore({
       const response = await api.getAllBookList()
       if (response.data == true) {
         commit('setAllBookList', data)
-        console.log(data)
+ 
       }
       return response.data
     },
+    async axiosMyBookList({ commit }, value) {
+      const response = await api.getBorrowBookList(value)
+      
+        commit('setMyBookList', response.data)
+      
+      return response.data
+    },
+    async axiosReturnBook({ commit }, data) {
+      const response = await api.returnBorrowBookServlet(data)
+      return response
+    },
+    async axiosFindBorrowBookData({ commit }, value) {
+      const response = await api.findBorrowBookDataServlet(value)
+      commit('setBorrowBookData', response.data)
+      return response.data
+    }
   },
   getters: {
     
@@ -86,5 +107,8 @@ export default createStore({
     getMyBookList(state) {
       return state.myBookList
     },
+    getBorrowBookData(state) {
+      return state.borrowBookData
+    }
   }
 })
