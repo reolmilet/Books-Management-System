@@ -37,6 +37,7 @@ export default createStore({
     },
     setBorrowBookData(state, borrowBookData) {
       state.borrowBookData = borrowBookData
+      console.log(state.borrowBookData)
     }
    
   },
