@@ -9,11 +9,11 @@
         开始借阅时间: {{ data.borrow_time }}
       </div>
       <div>
-        归还时间: {{ data.bo_return==0?data.return_time:'未归还' }}
+        归还时间: {{ data.bo_return!=0?data.return_time:'未归还' }}
       </div>
       
       <div>
-       总共借阅时间: {{ data.bo_return==0?data.borrowtime :'未归还'}}
+       总共借阅时间: {{ data.bo_return!=0?data.borrowtime+'分钟' :'未归还'}}
       </div>
     </el-collapse-item>
   </div>

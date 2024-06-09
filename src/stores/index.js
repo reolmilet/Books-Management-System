@@ -22,6 +22,7 @@ export default createStore({
     },
     setMatch(state, match) {
       state.match = match
+      console.log(state.match)
     },
     setAllBookList(state, AllBookList) {
       state.AllBookList = AllBookList
@@ -61,6 +62,7 @@ export default createStore({
      
       commit('setSignin', res.data.userdata)
       commit('setMatch', true)
+     
       await dispatch('axiosMyBookList', res.data.userdata.id)
       await dispatch('axiosFindBorrowBookData', res.data.userdata.id)
      

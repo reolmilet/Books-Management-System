@@ -5,6 +5,7 @@ import signup from '../view/signup.vue'
 import bookShopping from '../view/bookShopping.vue'
 import myBook from '../view/myBook.vue'
 import myData from '../view/myData.vue'
+import stores from '../stores'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -49,7 +50,7 @@ const router = createRouter({
 //全局前置路由守卫————初始化的时候被调用、每次路由切换之前被调用
 router.beforeEach((to, from, next) => {
   //如果路由需要跳转
-  if (to.meta.isAuth) {
+  if (to.name === 'myBook' || to.name === 'myData') {
     if (stores.state.match == true) {
       next() //放行
     } else {

@@ -15,7 +15,7 @@
       </el-statistic>
     </el-col>
     <el-col :span="8">
-      <el-statistic title="看书时间为" :value="totalBorrowTime+'分钟'" />
+      <el-statistic title="看书时间为" :value="outputValue+'分钟'" />
     </el-col>
    
   </el-row>
@@ -44,11 +44,11 @@ export default {
       return borrowData.value.reduce((total, item) => total + item.borrowtime, 0)
     })
     
-    const source = ref(0);
+    const source = ref(totalBorrowTime);
     const outputValue = useTransition(source, {
       duration: 1500,
     });
-    source.value = 172000;
+    
     return { outputValue, borrowData,borrowOnce,totalBorrowTime };
   },
 };
